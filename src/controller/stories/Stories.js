@@ -1,10 +1,11 @@
 const request = require('supertest')
 const { expect } = require('chai')
 const sessionVariables = require('../stories/sessionVariables.js')
+const variables = require('../../../variables')
 module.exports ={
 
     searchFiveStories : async function (){
-       await request('https://gateway.marvel.com:443/v1/public').get('/stories?limit=5&offset=100&apikey=d6fa171a71b818ffd0455d1c59b8c554&ts=1668507926&hash=0605d67484f892bc6f57b83297be12f5')
+       await request(variables.MARVEL_URL).get(`/stories?limit=5&offset=100&apikey=${variables.apikey}&ts=${variables.ts}&hash=${variables.hash}`)
         .then((res)=>{
         //console.log(res.body)
          sessionVariables.statusCode=res.body.code
